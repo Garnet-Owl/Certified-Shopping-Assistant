@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assistant Shopper and Delivery</title>
+    <style>
+        /* CSS styles */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Assistant Shopper and Delivery</h1>
+    </header>
+    <nav>
+        <ul>
+          <li><a href="#homepage-section">Home</a></li>
+          <li><a href="#shopping-form">Submit Shopping List</a></li>
+          <li><a href="#confirmation-section">Confirmation</a></li>
+          <li><a href="#delivery-section">Delivery Information</a></li>
+          <li><a href="#contact-section">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section id="homepage-section">
+      <h2>Welcome to our website!</h2>
+      <p>We are here to help you with your shopping needs. Submit your shopping list and contact information below, and we will contact you to confirm your request.</p>
+    </section>
+
+    <section id="shopping-form">
+      <h2>Submit Shopping List</h2>
+      <form id="shopping-form">
+          <!-- Form inputs -->
+      </form>
+    </section>
+
+    <!-- Other sections -->
+
+    <script>
+      document.getElementById("shopping-form").addEventListener("submit", function(event) {
+          event.preventDefault();
+
+          // Get form data
+          var name = document.getElementById("name").value;
+          var email = document.getElementById("email").value;
+          var phone = document.getElementById("phone").value;
+          var store = document.getElementById("store").value;
+
+          // Get shopping list data from table
+          var shoppingListTable = document.getElementById("shopping-list-table");
+          var rows = shoppingListTable.getElementsByTagName("tr");
+          var shoppingList = [];
+
+          // Start from index 1 to skip the table header row
+          for (var i = 1; i < rows.length; i++) {
+              var cells = rows[i].getElementsByTagName("td");
+              var item = cells[0].innerText;
+              var quantity = cells[1].innerText;
+              var price = cells[2].innerText;
+              shoppingList.push({
+                  item: item,
+                  quantity: quantity,
+                  price: price
+              });
+          }
+
+          // Process form data (e.g., send to server, display confirmation message)
+          alert("Thank you, " + name + "! We have received your shopping list and will contact you shortly.");
+
+          // Clear form
+          document.getElementById("shopping-form").reset();
+      });
+
+      // Add JavaScript code to dynamically add rows to the shopping list table
+      var shoppingListTable = document.getElementById("shopping-list-table");
+      var addItemButton = document.getElementById("add-item-button");
+
+      addItemButton.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          // Get form inputs for the new item
+          var newItem = document.getElementById("new-item").value;
+          var newQuantity = document.getElementById("new-quantity").value;
+          var newPrice = document.getElementById("new-price").value;
+
+          // Create a new row with the item details
+          var newRow = document.createElement("tr");
+          var itemCell = document.createElement("td");
+          itemCell.innerText = newItem;
+          var quantityCell = document.createElement("td");
+          quantityCell.innerText = newQuantity;
+          var priceCell = document.createElement("td");
+          priceCell.innerText = newPrice;
+
+          newRow.appendChild(itemCell);
+          newRow.appendChild(quantityCell);
+          newRow.appendChild(priceCell);
+
+          // Add the new row to the shopping list table
+          shoppingListTable.appendChild(newRow);
+
+          // Clear the form inputs
+          document.getElementById("new-item").value = "";
+          document.getElementById("new-quantity").value = "";
+          document.getElementById("new-price").value = "";
+      });
+    </script>
+</body>
+</html>
